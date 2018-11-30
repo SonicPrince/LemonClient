@@ -12,27 +12,34 @@ using Tables;
 
 public class GameStartUp : MonoBehaviour
 {
-    private ILoadRequest<string> jsonFile;
 
     void Start()
     {
         //InitLoadManager
         LoadManager.Instance().SetRootPath(@"E:\Unity2017Work\Lemon\Lemon_assetsdata\Templates");
-
-        jsonFile = LoadManager.Instance().LoadText("Avatar.json");
+        CoroutineManager.Instance.Start(LoadJson());
     }
-   
+
+    private IEnumerator LoadJson()
+    {
+        var request = LoadManager.Instance().LoadText("Avatar.json");
+
+        yield return request;
+
+        if (request != null)
+        {
+            if (request.Result != null)
+                Log.Info(request.Result);
+            if (request.Error != null)
+                Log.Info(request.Error);
+        }
+    }
+
     private void Update()
     {
         CoroutineManager.Instance.UpdateCoroutine();
 
-        if (jsonFile != null)
-        {
-            if (jsonFile.Result != null)
-                Log.Info(jsonFile.Result);
-            if (jsonFile.Error != null)
-                Log.Info(jsonFile.Error);
-        }
+
     }
 
 

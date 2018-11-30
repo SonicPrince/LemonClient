@@ -61,8 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\DataTables\Tables.cs" />
+    <Compile Include="Assets\LemonFrame\Scripts\Async\AsyncCompleteChecker.cs" />
+    <Compile Include="Assets\LemonFrame\Scripts\Async\Coroutine.cs" />
+    <Compile Include="Assets\LemonFrame\Scripts\Async\CoroutineManager.cs" />
     <Compile Include="Assets\LemonFrame\Scripts\CallBack.cs" />
-    <Compile Include="Assets\LemonFrame\Scripts\CoroutineManager.cs" />
     <Compile Include="Assets\LemonFrame\Scripts\Interface\IAsync.cs" />
     <Compile Include="Assets\LemonFrame\Scripts\Interface\IDataTable.cs" />
     <Compile Include="Assets\LemonFrame\Scripts\Interface\IWait.cs" />
@@ -289,14 +291,14 @@
     <Reference Include="LitJson">
       <HintPath>E:/Unity2017Work/Lemon/Lemon_client/Assets/LemonFrame/LitJson.dll</HintPath>
     </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>E:/Unity2017Work/Lemon/Lemon_client/Assets/Plugins/ProtoNet/protobuf-net.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>E:/Unity2017Work/Lemon/Lemon_client/Assets/Plugins/ProtoNet/protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/MySoftWares/Unity2018/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

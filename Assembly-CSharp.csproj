@@ -76,8 +76,10 @@
     <Compile Include="Assets\LemonFrame\Scripts\Log.cs" />
     <Compile Include="Assets\LemonFrame\Scripts\LSingleton.cs" />
     <Compile Include="Assets\Proto\proto.cs" />
+    <Compile Include="Assets\Scripts\GamePath.cs" />
     <Compile Include="Assets\Scripts\GameStartUp.cs" />
     <Compile Include="Assets\Scripts\LoadTemplate.cs" />
+    <Compile Include="Assets\Scripts\Path.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/Unity2017Work/Lemon/Lemon_client/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

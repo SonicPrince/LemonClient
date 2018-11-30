@@ -1,38 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Lemon;
 using UnityEngine;
-using System.Threading;
-using Lemon;
-using System.Threading.Tasks;
-using System;
-using System.IO;
-using System.Text;
-using System.Reflection;
-using Tables;
 
 public class GameStartUp : MonoBehaviour
 {
+    public string dataPath = "../../../Lemon_assetsdata/";
 
-    void Start()
+    void Awake()
     {
         //InitLoadManager
-        LoadManager.Instance().SetRootPath(@"E:\Unity2017Work\Lemon\Lemon_assetsdata\Templates");
-        CoroutineManager.Instance.Start(LoadJson());
+        GamePath.SetEditorPath(dataPath);
+#if UNITY_EDITOR
+        LoadManager.Instance().SetRootPath(GamePath.editorDataPath);
+#endif
     }
 
-    private IEnumerator LoadJson()
+    private void Start()
     {
-        var request = LoadManager.Instance().LoadText("Avatar.json");
-
-        yield return request;
-
-        if (request != null)
-        {
-            if (request.Result != null)
-                Log.Info(request.Result);
-            if (request.Error != null)
-                Log.Info(request.Error);
-        }
+        LoadTemplate.Instance().StartLoad();
     }
 
     private void Update()

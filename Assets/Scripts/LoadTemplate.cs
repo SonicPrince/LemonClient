@@ -6,18 +6,11 @@ using UnityEngine;
 public class LoadTemplate : LSingleton<LoadTemplate>
 {
     private const string templatePath = "Templates";
-    FileInfo[] files;
-    int idx = 0;
 
     public void StartLoad()
     {
-        //Log.Info("Application.dataPath:" + Application.dataPath);
-        //Log.Info("Application.persistentDataPath:" + Application.persistentDataPath);
-        //Log.Info("Application.streamingAssetsPath:" + Application.streamingAssetsPath);
-        //Log.Info("Application.temporaryCachePath:" + Application.temporaryCachePath);
-
         DirectoryInfo root = new DirectoryInfo(GamePath.editorDataPath + "/" + templatePath);
-        files = root.GetFiles();
+        FileInfo[] files = root.GetFiles();
 
         if (files != null && files.Length > 0)
         {

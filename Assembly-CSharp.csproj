@@ -217,8 +217,10 @@
     <Compile Include="Assets\LemonFrame\Scripts\Unity\AssetBundleLoader.cs" />
     <Compile Include="Assets\LemonFrame\Scripts\Unity\UnityAssetsLoader.cs" />
     <Compile Include="Assets\Proto\proto.cs" />
+    <Compile Include="Assets\Scripts\Event.cs" />
     <Compile Include="Assets\Scripts\GamePath.cs" />
     <Compile Include="Assets\Scripts\GameStartUp.cs" />
+    <Compile Include="Assets\Scripts\LoadAssetbundle.cs" />
     <Compile Include="Assets\Scripts\LoadTemplate.cs" />
     <None Include="Assets\FairyGUI\Resources\Shaders\AddOn\FairyGUI-BlurFilter.shader" />
     <None Include="Assets\FairyGUI\Resources\Shaders\FairyGUI-Text.shader" />

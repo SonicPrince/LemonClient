@@ -21,7 +21,6 @@ public class LoadTemplate : LSingleton<LoadTemplate>
         }
     }
 
-
     private IEnumerator LoadAllJson(string fileName)
     {
         var request = LoadManager.Instance().LoadText(templatePath + "/" + fileName);

@@ -63,7 +63,7 @@ namespace Lemon
             eventTable[eventType] = (CallBack)eventTable[eventType] - handler;
         }
 
-        public static void Broadcast(object eventType, MessagerMode mode)
+        public static void Broadcast(object eventType, MessagerMode mode = MessagerMode.DONT_REQUARE_LISTENNER)
         {
             Delegate d;
             if (eventTable.TryGetValue(eventType, out d))

@@ -1,6 +1,8 @@
 ﻿using Lemon;
+using System;
 using System.Collections;
 using UnityEngine;
+using FairyGUI;
 
 public class GameStartUp : MonoBehaviour
 {
@@ -19,42 +21,39 @@ public class GameStartUp : MonoBehaviour
     private void Start()
     {
         //LoadTemplate.Instance().StartLoad();
-        CoroutineManager.Instance.Start(LoadRole("role01"));
+        LoadAssetbundle.Instance().StartLoad();
+        //CoroutineManager.Instance.Start(LoadRole("role01"));
+        LMessage.AddListener(LoadEvent.LoadFinish, OnLoadFinished);
+
+        //CoroutineManager.Instance.Start(LoadBattleUI());
+    }
+
+    private void OnLoadFinished()
+    {
+        CoroutineManager.Instance.Start(LoadBattleUI());
+
+    }
+
+    private IEnumerator LoadBattleUI()
+    {
+        var request = LoadManager.Instance().LoadAsset<AssetBundle>("UI/battle");
+        yield return request;
+        Log.Info("LoadBattleUI");
+        if (request.Error == null)
+        {
+            UIPackage.AddPackage(request.Result);
+            var ui = UIPackage.CreateObject("Battle", "BattleUI").asCom;
+            Log.Info("LoadBattleUI -----");
+            
+            //以下几种方式都可以将view显示出来：
+            //1，直接加到GRoot显示出来
+            GRoot.inst.AddChild(ui);
+        }
     }
 
     private void Update()
     {
         CoroutineManager.Instance.UpdateCoroutine();
     }
-
-    private IEnumerator LoadRole(string fileName)
-    {
-        Log.Info("begin LoadRole:");
-        var request = LoadManager.Instance().LoadAsset<Object>(@"E:\Unity2017Work\Lemon\Lemon_assetsdata\Model\role01#" + fileName);
-        yield return request;
-
-        Log.Info("request:" + request);
-        if (request != null)
-        {
-            if (request.Result != null)
-            {
-                Log.Info(request.Result.ToString());
-                var ab = request.Result;
-               
-                GameObject.Instantiate(ab);
-
-            }
-            if (request.Error != null)
-                Log.Info(request.Error);
-
-            Log.Info("sdasds");
-        }
-    }
-
-
-
-
-
-
 
 }

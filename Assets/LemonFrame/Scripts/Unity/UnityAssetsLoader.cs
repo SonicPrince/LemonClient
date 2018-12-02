@@ -37,11 +37,26 @@ namespace Lemon
 
         AssetBundleLoader abl = new AssetBundleLoader();
 
+        string _rootpath = string.Empty;
         public void Init()
         {
             //LoadM
+            _rootpath = GamePath.editorDataPath;
+            LoadManager.Instance().AddLoader<AssetBundle>(request => { CoroutineManager.Instance.Start(LoadAssetbundle(request)); });
             LoadManager.Instance().AddLoader<UnityEngine.Object>(request => { CoroutineManager.Instance.Start(LoadObjectImpl(request)); });
-            LoadManager.Instance().AddLoader<AssetBundle>(request => { abl.LoadAssetBundle(request.fileName); });
+        }
+
+        private IEnumerator LoadAssetbundle(LoadRequest request)
+        {
+            var req1 = abl.LoadAssetBundle(_rootpath + request.fileName);
+            yield return req1;
+            if (req1.Error != null)
+            {
+                request.SetError(req1.Error);
+                yield break;
+            }
+
+            request.SetResult(req1.Result);
         }
 
         private IEnumerator LoadObjectImpl(LoadRequest request)
@@ -49,7 +64,7 @@ namespace Lemon
             string assetName;
             string fileName = SplitFileName(request.fileName, out assetName);
 
-            var req1 = abl.LoadAssetBundle(fileName);
+            var req1 = abl.LoadAssetBundle(_rootpath + fileName);
             yield return req1;
 
             if (req1.Error != null)

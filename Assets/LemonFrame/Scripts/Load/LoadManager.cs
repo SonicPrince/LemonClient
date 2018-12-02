@@ -93,6 +93,8 @@ namespace Lemon
 
         private string _rootPath;
 
+        public string RootPath { get { return _rootPath; } }
+
         /// <summary>
         /// 初始化根目录
         /// 所有文件完整路径为：rootPath+"\\"+fileName
@@ -109,7 +111,7 @@ namespace Lemon
             {
                 try
                 {
-                    return syncLoadFunc(_rootPath + "\\" + request.fileName);
+                    return syncLoadFunc(request.fileName);
                 }
                 catch (Exception e)
                 {

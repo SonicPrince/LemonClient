@@ -8,7 +8,8 @@ namespace Lemon
 
     public class AssetBundleLoader
     {
-        Dictionary<string, AssetBundle> _dicAssetbundCach = new Dictionary<string, AssetBundle>();
+        private Dictionary<string, AssetBundle> _dicAssetbundCach = new Dictionary<string, AssetBundle>();
+
         public ILoadRequest<AssetBundle> LoadAssetBundle(string fileName)
         {
             var request = new UnityAssetRequest<AssetBundle>(fileName);
@@ -30,7 +31,6 @@ namespace Lemon
             CoroutineManager.Instance.Start(LoadAssetBundleImpl(request));
         }
 
-
         private IEnumerator LoadAssetBundleImpl(UnityAssetRequest<AssetBundle> request)
         {
             //Log.Info("LoadAssetBundleImpl " + c.fileName);
@@ -41,6 +41,7 @@ namespace Lemon
             var assetBundle = req1.assetBundle;
             if (assetBundle != null)
             {
+                _dicAssetbundCach[request.fileName] = req1.assetBundle;
                 request.SetResult(req1.assetBundle);
             }
             else

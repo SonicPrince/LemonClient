@@ -33,8 +33,6 @@ namespace Lemon
 
         private IEnumerator LoadAssetBundleImpl(UnityAssetRequest<AssetBundle> request)
         {
-            //Log.Info("LoadAssetBundleImpl " + c.fileName);
-
             var req1 = AssetBundle.LoadFromFileAsync(request.fileName);
             yield return req1;
 

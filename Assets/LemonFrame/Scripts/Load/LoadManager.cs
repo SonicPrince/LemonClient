@@ -111,7 +111,7 @@ namespace Lemon
             {
                 try
                 {
-                    return syncLoadFunc(request.fileName);
+                    return syncLoadFunc(_rootPath + "/" + request.fileName);
                 }
                 catch (Exception e)
                 {

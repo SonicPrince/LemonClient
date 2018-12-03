@@ -48,7 +48,7 @@ namespace Lemon
 
         private IEnumerator LoadAssetbundle(LoadRequest request)
         {
-            var req1 = abl.LoadAssetBundle(_rootpath + request.fileName);
+            var req1 = abl.LoadAssetBundle(_rootpath + "/" + request.fileName);
             yield return req1;
             if (req1.Error != null)
             {

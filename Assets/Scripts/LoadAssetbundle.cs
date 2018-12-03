@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lemon;
 using System.IO;
+using System;
 
 public class LoadAssetbundle : LSingleton<LoadAssetbundle>
 {
     private const string modelPath = "Model";
     private const string uiPath = "UI";
 
-    public void StartLoad()
+    public void StartLoad(Action<int, int> loadProgress)
     {
         counter = 0;
-        LoadModel(modelPath);
-        LoadModel(uiPath);
+        LoadModel(modelPath, loadProgress);
+        LoadModel(uiPath, loadProgress);
     }
 
     private int counter = 0;
-    private void LoadModel(string path)
+    private void LoadModel(string path, Action<int, int> loadProgress)
     {
         DirectoryInfo root = new DirectoryInfo(GamePath.editorDataPath + "/" + path);
         FileInfo[] files = root.GetFiles();
@@ -30,21 +31,19 @@ public class LoadAssetbundle : LSingleton<LoadAssetbundle>
                     continue;
 
                 counter++;
-                CoroutineManager.Instance.Start(LoadAb(path + "/" + file.Name));
+                CoroutineManager.Instance.Start(LoadAb(path + "/" + file.Name.ToLower(), loadProgress));
             }
         }
     }
 
     private int finish = 0;
-    private IEnumerator LoadAb(string fileName)
+    private IEnumerator LoadAb(string fileName, Action<int, int> loadProgress)
     {
         var request = LoadManager.Instance().LoadAsset<AssetBundle>(fileName);
         yield return request;
+
         finish++;
-        if (finish >= counter)
-        {
-            LMessage.Broadcast(LoadEvent.LoadFinish);
-        }
+        loadProgress?.Invoke(finish, counter);
     }
 
 }

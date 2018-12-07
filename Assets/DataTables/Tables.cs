@@ -14,12 +14,12 @@ namespace Tables
 
 namespace Tables
 {
-	public class EmojiTemplate
+	public class UITemplate
 	{
-		public int EmojiID;
+		public int Id;
 		public string sName;
-		public int iGroup;
-		public string sUrl;
+		public string sPkgName;
+		public string sCompName;
 		public string sDesc;
 	}
 }

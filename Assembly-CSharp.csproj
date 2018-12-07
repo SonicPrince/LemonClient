@@ -218,6 +218,8 @@
     <Compile Include="Assets\LemonFrame\Scripts\Unity\UnityAssetsLoader.cs" />
     <Compile Include="Assets\Proto\proto.cs" />
     <Compile Include="Assets\Scripts\Battle\Position.cs" />
+    <Compile Include="Assets\Scripts\Data\AvatarTable.cs" />
+    <Compile Include="Assets\Scripts\Data\UITemplateTable.cs" />
     <Compile Include="Assets\Scripts\Event.cs" />
     <Compile Include="Assets\Scripts\GamePath.cs" />
     <Compile Include="Assets\Scripts\GameStartUp.cs" />
@@ -445,12 +447,6 @@
     <Reference Include="protobuf-net">
       <HintPath>E:/Unity2017Work/Lemon/Lemon_client/Assets/Plugins/ProtoNet/protobuf-net.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.StandardEvents">
-      <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
     <Reference Include="Entitas.Lite">
       <HintPath>E:/Unity2017Work/Lemon/Lemon_client/Assets/Scripts/Entitas-Lite/Entitas.Lite.dll</HintPath>
     </Reference>
@@ -459,6 +455,12 @@
     </Reference>
     <Reference Include="Entitas.VisualDebugging.Unity">
       <HintPath>E:/Unity2017Work/Lemon/Lemon_client/Assets/Scripts/Entitas-Lite/Entitas.VisualDebugging.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StandardEvents">
+      <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/MySoftWares/Unity2018/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

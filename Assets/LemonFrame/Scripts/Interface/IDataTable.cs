@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
@@ -58,8 +59,49 @@ namespace Lemon
             get { return _data; }
         }
 
+        public object Reflect { get; private set; }
+
         public virtual void Parse(string text)
         {
+            int startPos = text.IndexOf('[');
+            int endPos = text.LastIndexOf(']');
+            if (startPos > 0 && endPos > 0)
+            {
+                text = text.Substring(startPos, endPos + 1 - startPos);
+            }
+
+            var json = LitJson.JsonMapper.ToObject(text);
+            var fields = DataHelper.GetFields(typeof(T));
+
+            _data.Clear();
+
+            for (int i = 0; i < json.Count; i++)
+            {
+                var row = json[i];
+                var d = (T)Activator.CreateInstance(GetElememtType());
+                if (d == null)
+                {
+                    Log.Error($"[IDataTable] It's something error to create Instance{GetElememtType()}");
+                    return;
+                }
+
+                var e = ((IDictionary)row).GetEnumerator();
+                while (e.MoveNext())
+                {
+                    var key = e.Key as string;
+                    var val = e.Value as LitJson.JsonData;
+
+                    if (fields.ContainsKey(key))
+                    {
+                        var field = fields[key];
+                        if (field != null)
+                            DataHelper.SetFieldValue(d, field, val);
+                    }
+                }
+
+                _data.Add(d);
+            }
+
             DoLoaded();
         }
 

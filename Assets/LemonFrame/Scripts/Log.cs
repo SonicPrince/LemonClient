@@ -20,5 +20,12 @@ namespace Lemon
 #endif
         }
 
+        public static void Warning(string msg)
+        {
+#if UNITY_EDITOR
+            Debug.LogWarning(msg);
+#endif
+        }
+
     }
 }

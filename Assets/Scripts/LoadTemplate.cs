@@ -52,18 +52,11 @@ public class LoadTemplate : LSingleton<LoadTemplate>
 
     public void StartLoad()
     {
-        var tableBase = typeof(IDataTable);
-
-        Assembly assembly = Assembly.GetAssembly(tableBase);
-        foreach (var item in assembly.GetTypes())
+        InitTable();
+        foreach (var table in _tables)
         {
-            if (item.IsClass)
-            {
-                if (item.GetInterface(tableBase.Name) != null)
-                {
-                    Log.Info(item.Name);
-                }
-            }
+            Log.Info(table.GetName());
+            CoroutineManager.Instance.Start(LoadAllJson(table.GetName() + ".json", table));
         }
 
 
@@ -79,7 +72,7 @@ public class LoadTemplate : LSingleton<LoadTemplate>
         //}
     }
 
-    private IEnumerator LoadAllJson(string fileName)
+    private IEnumerator LoadAllJson(string fileName, IDataTable table)
     {
         var request = LoadManager.Instance().LoadText(templatePath + "/" + fileName);
         yield return request;
@@ -87,7 +80,11 @@ public class LoadTemplate : LSingleton<LoadTemplate>
         if (request != null)
         {
             if (request.Result != null)
+            {
+                table.Parse(request.Result);
                 Log.Info(request.Result);
+            }
+          
             if (request.Error != null)
                 Log.Info(request.Error);
         }

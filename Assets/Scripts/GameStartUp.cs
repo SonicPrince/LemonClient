@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using FairyGUI;
+using Tables;
 
 public class GameStartUp : MonoBehaviour
 {
@@ -39,8 +40,6 @@ public class GameStartUp : MonoBehaviour
             UIPackage.AddPackage(request.Result);
             var ui = UIPackage.CreateObject("Loading", "LoadingUI").asCom;
 
-            //以下几种方式都可以将view显示出来：
-            //1，直接加到GRoot显示出来
             GRoot.inst.AddChild(ui);
 
             LoadTemplate.Instance().StartLoad();
@@ -51,6 +50,13 @@ public class GameStartUp : MonoBehaviour
     private void OnProgress(int arg1, int arg2)
     {
         Log.Info($"Load progress <{arg1} / {arg2}>");
+
+        if (arg1 >= arg2)
+        {
+            var tpl = (UITemplate)UITemplateTable.Instance().Get(1);
+            if (tpl != null)
+                Log.Info($"{tpl.sName}-{tpl.sPkgName}-{tpl.sCompName}");
+        }
     }
 
     private void Update()

@@ -1,6 +1,6 @@
 ﻿using Lemon;
 
-public class UITemplateTable : DataTable<Tables.UITemplate>
+public class UITemplateTable : LookupDataTable<Tables.UITemplate, int>
 {
     public static UITemplateTable Instance()
     {

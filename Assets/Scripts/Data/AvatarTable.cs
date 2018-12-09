@@ -1,6 +1,6 @@
 ﻿using Lemon;
 
-public class AvatarTable : DataTable<Tables.Avatar>
+public class AvatarTable : LookupDataTable<Tables.Avatar, int>
 {
     public static AvatarTable Instance()
     {

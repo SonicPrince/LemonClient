@@ -25,6 +25,7 @@ public class UIBase
         else
         {
             _root.visible = true;
+            OnOpen();
         }
     }
 
@@ -33,7 +34,10 @@ public class UIBase
         isOpen = false;
 
         if (_root != null)
+        {
             _root.visible = false;
+            OnClose();
+        }
     }
 
     private void DoLoad()
@@ -54,10 +58,26 @@ public class UIBase
             _root = ui;
 
             if (isOpen)
+            {
                 _root.visible = true;
+                OnOpen();
+            }
             else
+            {
                 _root.visible = false;
+                OnClose();
+            }
         }
+    }
+
+    public virtual void OnOpen()
+    {
+
+    }
+
+    public virtual void OnClose()
+    {
+
     }
 
 }

@@ -22,7 +22,17 @@ public class GameStartUp : MonoBehaviour
     private void Start()
     {
         LMessage.AddListener<int>(LoadEvent.LoadFinish, OnLoadFinished);
-        CoroutineManager.Instance.Start(LoadLoaddingUI());
+        CoroutineManager.Instance.Start(DelayLoad());
+
+        UIManager.Instance().OpenUI("Loading", "LoadingUI");
+    }
+
+    private IEnumerator DelayLoad()
+    {
+        yield return new Lemon.WaitForSeconds(1f);
+
+        LoadTemplate.Instance().StartLoad();
+        LoadAssetbundle.Instance().StartLoad(OnProgress);
     }
 
     private void OnLoadFinished(int pro)

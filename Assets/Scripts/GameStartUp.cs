@@ -21,7 +21,6 @@ public class GameStartUp : MonoBehaviour
 
     private void Start()
     {
-        LMessage.AddListener<int>(LoadEvent.LoadFinish, OnLoadFinished);
         CoroutineManager.Instance.Start(DelayLoad());
 
         UIManager.Instance().OpenUI("Loading", "LoadingUI");
@@ -33,11 +32,6 @@ public class GameStartUp : MonoBehaviour
 
         LoadTemplate.Instance().StartLoad();
         LoadAssetbundle.Instance().StartLoad(OnProgress);
-    }
-
-    private void OnLoadFinished(int pro)
-    {
-        Log.Info("----" + pro);
     }
 
     private IEnumerator LoadLoaddingUI()
@@ -55,8 +49,6 @@ public class GameStartUp : MonoBehaviour
             LoadTemplate.Instance().StartLoad();
             LoadAssetbundle.Instance().StartLoad(OnProgress);
         }
-
-        LMessage.Broadcast(LoadEvent.LoadFinish, 100, MessagerMode.DONT_REQUARE_LISTENNER);
     }
 
     private void OnProgress(int arg1, int arg2)
@@ -69,11 +61,14 @@ public class GameStartUp : MonoBehaviour
             if (tpl != null)
                 Log.Info($"{tpl.sName}-{tpl.sPkgName}-{tpl.sCompName}");
         }
+
+        LMessage.Broadcast(LoadEvent.LoadProgressUpdate, arg1, arg2);
     }
 
     private void Update()
     {
         CoroutineManager.Instance.UpdateCoroutine();
+        UIManager.Instance().Update();
     }
 
 }

@@ -36,6 +36,8 @@ public class UIBase
         if (_root != null)
         {
             _root.visible = false;
+            //取消事件注册
+
             OnClose();
         }
     }
@@ -72,7 +74,7 @@ public class UIBase
 
     public virtual void OnOpen()
     {
-
+        RegisterEvent();
     }
 
     public virtual void OnClose()
@@ -80,4 +82,18 @@ public class UIBase
 
     }
 
+    public virtual void RegisterEvent()
+    {
+
+    }
+
+    public virtual void OnUpdate()
+    {
+
+    }
+
+    public void Update()
+    {
+        OnUpdate();
+    }
 }

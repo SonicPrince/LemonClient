@@ -75,6 +75,24 @@ namespace Lemon
             eventTable[eventType] = (CallBack<T>)eventTable[eventType] + handler;
         }
 
+        public static void AddListener<T, U>(object eventType, CallBack<T, U> handler)
+        {
+            if (!eventTable.ContainsKey(eventType))
+            {
+                eventTable.Add(eventType, null);
+            }
+
+            Delegate d = eventTable[eventType];
+            if (d != null && d.GetType() != handler.GetType())
+            {
+                ///抛出异常
+                throw new ListenerException("ListenerException error ");
+            }
+
+            eventTable[eventType] = (CallBack<T, U>)eventTable[eventType] + handler;
+        }
+
+
         public static void RemoveListener(object eventType, CallBack handler)
         {
             eventTable[eventType] = (CallBack)eventTable[eventType] - handler;
@@ -106,6 +124,23 @@ namespace Lemon
                 if (callback != null)
                 {
                     callback(arg1);
+                }
+                else
+                {
+                    throw new BroadcastException("brocast error");
+                }
+            }
+        }
+
+        public static void Broadcast<T, U>(object eventType, T arg1, U arg2, MessagerMode mode = MessagerMode.DONT_REQUARE_LISTENNER)
+        {
+            Delegate d;
+            if (eventTable.TryGetValue(eventType, out d))
+            {
+                CallBack<T, U> callback = d as CallBack<T, U>;
+                if (callback != null)
+                {
+                    callback(arg1, arg2);
                 }
                 else
                 {

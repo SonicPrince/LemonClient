@@ -5,7 +5,7 @@ using Lemon;
 using System;
 using System.Reflection;
 
-public class UIDefine : System.Attribute
+public class UIDefine : Attribute
 {
     public string pkgName;
     public string compName;
@@ -67,7 +67,13 @@ public class UIManager : LSingleton<UIManager>
             uibase.Show(pkgName, compName);
             _openUI[key] = uibase;
         }
+    }
 
-
+    public void Update()
+    {
+        foreach (var ui in _openUI)
+        {
+            ui.Value.Update();
+        }
     }
 }

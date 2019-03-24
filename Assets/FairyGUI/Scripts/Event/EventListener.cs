@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -20,10 +21,10 @@ namespace FairyGUI
 			this._type = type;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public string type
+        /// <summary>
+        /// 
+        /// </summary>
+        public string type
 		{
 			get { return _type; }
 		}

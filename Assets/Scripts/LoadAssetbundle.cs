@@ -9,12 +9,14 @@ public class LoadAssetbundle : LSingleton<LoadAssetbundle>
 {
     private const string modelPath = "Model";
     private const string uiPath = "UI";
+    private const string scenePath = "Scenes";
 
     public void StartLoad(Action<int, int> loadProgress)
     {
         counter = 0;
         LoadModel(modelPath, loadProgress);
         LoadModel(uiPath, loadProgress);
+        LoadModel(scenePath, loadProgress);
     }
 
     private int counter = 0;

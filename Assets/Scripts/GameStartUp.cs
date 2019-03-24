@@ -24,6 +24,7 @@ public class GameStartUp : MonoBehaviour
         CoroutineManager.Instance.Start(DelayLoad());
 
         UIManager.Instance().OpenUI("Loading", "LoadingUI");
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private IEnumerator DelayLoad()
@@ -57,9 +58,8 @@ public class GameStartUp : MonoBehaviour
 
         if (arg1 >= arg2)
         {
-            var tpl = (UITemplate)UITemplateTable.Instance().Get(1);
-            if (tpl != null)
-                Log.Info($"{tpl.sName}-{tpl.sPkgName}-{tpl.sCompName}");
+            //加载完成
+            LMessage.Broadcast(LoadEvent.LoadFinish);
         }
 
         LMessage.Broadcast(LoadEvent.LoadProgressUpdate, arg1, arg2);

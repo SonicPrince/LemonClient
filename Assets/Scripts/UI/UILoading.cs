@@ -10,6 +10,7 @@ public class UILoading : UIBase
 {
     private GProgressBar _progress;
     private GImage _logo;
+    private GGraph _click;
 
     private float count = 0;
     private float max = 0;
@@ -23,15 +24,23 @@ public class UILoading : UIBase
         if (progreebar != null)
             _progress = progreebar as GProgressBar;
 
-        var logo = _root.GetChild("logo") as GImage;
-        if (logo != null)
-            _logo = logo as GImage;
+        var _logo = _root.GetChild("logo") as GImage;
+        var _click = _root.GetChild("click") as GGraph;
 
         count = 0;
         max = 0;
         beginLoad = false;
 
+        _click.onClick.Add(OnBtnClick);
         Log.Info("OpenUILoading .. ");
+    }
+
+    private void OnBtnClick(EventContext context)
+    {
+        //关闭Loading，打开Main界面
+        UIManager.Instance().OpenUI("Main","LoginUI");
+        //close
+        Close();
     }
 
     public override void OnClose()
@@ -58,8 +67,6 @@ public class UILoading : UIBase
 
         _progress.max = max;
         _progress.value = count;
-
-        Log.Info("[UILoading] update finished");
     }
 
     public override void RegisterEvent()
@@ -73,7 +80,5 @@ public class UILoading : UIBase
         count = cur;
         max = all;
         beginLoad = true;
-
-        Log.Info($"[UILoading] OnLoadUpdate {count}/{max}");
     }
 }

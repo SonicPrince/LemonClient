@@ -230,7 +230,10 @@
     <Compile Include="Assets\Scripts\LoadAssetbundle.cs" />
     <Compile Include="Assets\Scripts\LoadTemplate.cs" />
     <Compile Include="Assets\Scripts\UI\UIBase.cs" />
+    <Compile Include="Assets\Scripts\UI\UIBattle.cs" />
     <Compile Include="Assets\Scripts\UI\UILoading.cs" />
+    <Compile Include="Assets\Scripts\UI\UILogin.cs" />
+    <Compile Include="Assets\Scripts\UI\UIMain.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIPackageManager.cs" />
     <None Include="Assets\FairyGUI\Resources\Shaders\AddOn\FairyGUI-BlurFilter.shader" />
